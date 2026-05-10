@@ -1,7 +1,7 @@
 export const profile = {
   name: "Jether Omictin",
   role: "Full Stack Developer",
-  location: "Cebu, Philippines",
+  location: "Philippines",
   email: "jethomictin@gmail.com",
   phone: "+63 945 495 1546",
   github: "github.com/Jethrr",

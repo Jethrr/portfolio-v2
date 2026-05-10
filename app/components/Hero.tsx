@@ -25,7 +25,7 @@ export function Hero() {
               {profile.role}
             </p>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex items-center gap-2">
             <ContactLink
               href={LOCATION_MAPS_URL}
               icon={<PinIcon className="h-3.5 w-3.5" />}
@@ -81,7 +81,7 @@ function ContactLink({
         rel={isMail ? undefined : "noopener noreferrer"}
         aria-label={label}
         title={label}
-        className="group/link inline-flex items-center gap-1.5 rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-3 py-1.5 font-mono text-[11px] font-medium text-neutral-200 transition-all hover:border-white/20 hover:bg-white/[0.06] hover:text-neutral-100 sm:gap-2 sm:px-3.5 sm:text-xs"
+        className="group/link inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-3 py-1.5 font-mono text-[11px] font-medium text-neutral-200 transition-all hover:border-white/20 hover:bg-white/[0.06] hover:text-neutral-100 sm:gap-2 sm:px-3.5 sm:text-xs"
       >
         {icon}
         <span>{label}</span>
