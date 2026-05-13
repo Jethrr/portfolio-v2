@@ -34,13 +34,13 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     company: "Freelance | Independent Contractor",
-    role: "Web Developer | Automation Engineer",
+    role: "Web Developer | Automation Specialist",
     period: "Oct 2023 — Present",
     location: "Remote",
     bullets: [
-      "Deployed a campus-wide priority queue management system, reducing wait times for administrative services by 50% and streamlining student reservations.",
-      "Engineered PDF-based automation pipelines for a US client to extract consultant commission data — reducing manual processing time by 60%.",
-      "Designed and shipped producation-grade web applications for clients and businesses.",
+      "Developed a localized Rental Management SaaS that replaced manual paper ledgers with an automated billing engine, generating recurring invoices for 20+ units and reducing administrative workload by 50%.",
+      "Engineered PDF-based automation pipelines for a US client to extract consultant commission data, reducing manual processing time by 60%.",
+      "Designed and shipped production-grade app solutions for clients and businesses",
     ],
   },
   {
