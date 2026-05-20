@@ -34,7 +34,7 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     company: "Freelance | Independent Contractor",
-    role: "Web Developer | Automation Specialist",
+    role: "Software Developer | Automation Specialist",
     period: "Oct 2023 — Present",
     location: "Remote",
     bullets: [
@@ -46,13 +46,13 @@ export const experience: Experience[] = [
   {
     company: "MPS Deped Region 10",
     role: "Full Stack Developer",
-    period: "Oct 2024 — Present",
+    period: "Nov 2025 — Present",
     location: "Remote",
     link: "https://depedmps.com/",
     bullets: [
       "Designed and developed a DepEd MPS monitoring platform that consolidates performance data across schools and districts, automating manual division-office workflows.",
       "Implemented CI/CD pipelines to improved deployment process using Coolify, Docker and Github Actions",
-      "Optimized database queries to improve data retrieval for analytics handling across 17+ districts and 100+ schools and 30k+ scores row.",
+      "Optimized database queries to improve data retrieval for analytics endpoints across 17 districts and 300+ schools and 1 million scores row by 66% (1min to 20s).",
     ],
   },
   {
