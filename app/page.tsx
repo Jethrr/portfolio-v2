@@ -18,8 +18,10 @@ export default function Home() {
         <Now />
         <Experience />
         <Projects />
-        <Publications />
-        <TechStack />
+        <div className="col-span-12 flex flex-col-reverse gap-3 lg:contents">
+          <Publications />
+          <TechStack />
+        </div>
         <Education />
         <Contact />
         <Footer />

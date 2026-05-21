@@ -7,7 +7,7 @@ import {
   PinIcon,
 } from "./Icons";
 
-const PROFILE_IMAGE_SRC = "/2x2.jpg";
+const PROFILE_IMAGE_SRC = "/profile.webp";
 const LOCATION_MAPS_URL = `https://maps.google.com/?q=${encodeURIComponent(
   profile.location,
 )}`;

@@ -37,9 +37,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Jether Omictin", url: "https://jeth.me" }],
   creator: "Jether Omictin",
   icons: {
-    icon: "/2x2.jpg",
-    shortcut: "/2x2.jpg",
-    apple: "/2x2.jpg",
+    icon: "/profile.webp",
+    shortcut: "/profile.webp",
+    apple: "/profile.webp",
   },
   metadataBase: new URL("https://jeth.me"),
   openGraph: {

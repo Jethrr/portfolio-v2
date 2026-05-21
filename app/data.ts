@@ -1,6 +1,6 @@
 export const profile = {
   name: "Jether Omictin",
-  role: "Full Stack Developer",
+  role: "Just a dev who likes building stuff",
   location: "Philippines",
   email: "jethomictin@gmail.com",
   phone: "+63 945 495 1546",
@@ -12,7 +12,7 @@ export const profile = {
   tagline:
     "Full-stack developer & AI enthusiast — shipping scalable web and mobile apps end-to-end.",
   summary:
-    "Hi, I'm Jether. I build practical, production-ready web and mobile systems end to end — focused on clean architecture, fast iteration, and shipping things that actually work in production.",
+    "Hi, I'm Jether. I build practical, production-ready web and mobile, automation solutions end to end — focused on clean architecture, fast iteration, and shipping things that actually work in production.",
 } as const;
 
 export const stats = [
@@ -38,9 +38,9 @@ export const experience: Experience[] = [
     period: "Oct 2023 — Present",
     location: "Remote",
     bullets: [
-      "Developed a localized Rental Management SaaS that replaced manual paper ledgers with an automated billing engine, generating recurring invoices for 20+ units and reducing administrative workload by 50%.",
+      "Developed a localized Rental Management SaaS that replaced manual paper ledgers with an automated billing engine, generating recurring invoices for 20+ units and reducing administrative workload by 70%.",
       "Engineered PDF-based automation pipelines for a US client to extract consultant commission data, reducing manual processing time by 60%.",
-      "Designed and shipped production-grade app solutions for clients and businesses",
+      "Designed and shipped production-grade web apps and automation solutions for clients and businesses.",
     ],
   },
   {
@@ -50,8 +50,8 @@ export const experience: Experience[] = [
     location: "Remote",
     link: "https://depedmps.com/",
     bullets: [
-      "Designed and developed a DepEd MPS monitoring platform that consolidates performance data across schools and districts, automating manual division-office workflows.",
-      "Implemented CI/CD pipelines to improved deployment process using Coolify, Docker and Github Actions",
+      "Built a DepEd MPS monitoring platform that streamlined division-office workflows by centralizing performance data across schools and districts, reducing manual processing and improving data accessibility.",
+      "Implemented CI/CD pipelines to improved deployment process using Coolify, Docker and Github Actions.",
       "Optimized database queries to improve data retrieval for analytics endpoints across 17 districts and 300+ schools and 1 million scores row by 66% (1min to 20s).",
     ],
   },
@@ -62,11 +62,9 @@ export const experience: Experience[] = [
     location: "Remote",
     link: "https://www.symph.co/",
     bullets: [
-      "Led development of b1gplay, enabling 100+ recruiter–student connections and increasing athlete visibility.",
-      "Optimized findmyshots disbursement queries, cutting load times by 83% (3 min → 30 s).",
-      "Built core modules (enrollment, attendance, automated Time-In/Out) for SOTG, integrating Semaphore SMS for real-time parent notifications.",
-      "Resolved PayMongo payment integration and shipped a VAT breakdown UI for clearer checkout pricing.",
-      "Authored NestJS engineering standards covering modular architecture, conventions, and API design.",
+      "Delivered and maintained secure, cross-platform digital solutions for startups and businesses, improving scalability and development efficiency using NextJS, React Native, and NestJS with cloud services such as GCP, Supabase, and Firebase.",
+      "Worked with 2 startups and 2 client projects leveraging AI-augmented workflows, REST APIs, and CI pipelines, improving delivery efficiency and contributing to up to 10% revenue growth.",
+      "Collaborated with cross-functional teams (product managers, designers, and developers) in an Agile Scrum environment, improving workflow coordination and delivery efficiency using ClickUp.",
     ],
   },
   
@@ -96,11 +94,13 @@ export const organizations: Organization[] = [
 ];
 
 export type Project = {
+  slug: string;
   name: string;
   blurb: string;
   description: string;
   href?: string;
-  hrefLabel?: string;
+  githubUrl?: string;
+  videoUrl?: string;
   status?: "Live" | "Featured" | "Case study";
   highlights: string[];
   tags: string[];
@@ -108,6 +108,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "uatt",
     name: "UATT",
     status: "Featured",
     blurb: "AI sepsis prediction · undergrad thesis",
@@ -121,16 +122,18 @@ export const projects: Project[] = [
     tags: ["Python", "ML", "Healthcare"],
   },
   {
+    slug: "cropnoses",
     name: "Cropnoses",
     status: "Live",
     blurb: "AI hydroponics mobile app",
     description:
-      "AI-powered hydroponics app with intelligent plant health analysis, CNN-based disease detection at 71% accuracy, and a real-time monitoring dashboard.",
-    href: "https://www.youtube.com/watch?v=f44aBTyZoLU&feature=youtu.be",
+      "A mobile app with intelligent plant health analysis improving lettuce crop monitoring efficiency with an accuracy of 85% using React Native, Expo, ExpressJS, MongoDB and MobileNet architecture",
+    videoUrl: "https://www.youtube.com/watch?v=f44aBTyZoLU",
     highlights: ["CNN disease detection · 71% acc", "Real-time monitoring"],
     tags: ["React Native", "Express", "MongoDB", "TensorFlow"],
   },
   {
+    slug: "kwentech",
     name: "KwenTech",
     status: "Live",
     blurb: "PH rental management platform",
@@ -141,6 +144,7 @@ export const projects: Project[] = [
     tags: ["Next.js", "PostgreSQL", "SaaS"],
   },
   {
+    slug: "tihik",
     name: "Tihik",
     status: "Live",
     blurb: "Budget tracker app",
@@ -151,11 +155,12 @@ export const projects: Project[] = [
     tags: ["Next.js", "PostgreSQL", "TailwindCSS"],
   },
   {
+    slug: "moodlequest",
     name: "MoodleQuest",
     status: "Live",
     blurb: "Gamified engagement platform for Moodle",
     description:
-      "A external gamified engagement platform built for moodleLMS, allowing students to earn badges and points for completing activities and quizzes.",
+      "An external gamified engagement platform built for moodleLMS, allowing students to earn badges and points for completing activities and quizzes.",
     href: "https://moodlequest.vercel.app/",
     highlights: ["Gamified engagement", "Asynchronous learning"],
     tags: ["Next.js", "PostgreSQL", "TailwindCSS"],
@@ -209,6 +214,14 @@ export const stack: StackGroup[] = [
     label: "Languages",
     items: ["TypeScript", "JavaScript", "Python", "C#", "SQL"],
   },
+  {
+    label: "CRM & CMS",
+    items: ["Airtable", "HubSpot", "WordPress", "Contentful"],
+  },
+  {
+    label: "Automation",
+    items: ["N8N", "Zapier", "Make.com", "OpenClaw", "GHL"],
+  },
 ];
 
 export const education = {
@@ -237,7 +250,7 @@ export const achievements = [
   }, 
  
   {
-    title: "26th Philippine Computing Science Congress",
+    title: "26th Philippine Computing Science Congress Researcher",
     detail: "Computing Society of the Philippines",
   },
 
