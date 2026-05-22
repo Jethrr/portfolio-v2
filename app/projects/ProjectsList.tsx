@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { type Project } from "../data";
 import { ArrowUpRightIcon } from "../components/Icons";
 
@@ -90,7 +91,19 @@ export function ProjectsList({ projects }: { projects: Project[] }) {
                 href={`/projects/${p.slug}`}
                 className="group/proj flex items-center gap-4 rounded-2xl border border-[var(--border)] bg-[var(--card)] p-4 transition-all hover:border-amber-300/30 hover:bg-white/[0.02] sm:gap-5 sm:p-5"
               >
-                <ProjectPlaceholder name={p.name} index={i} />
+                {p.image ? (
+                  <div className="flex h-20 w-20 flex-none items-center justify-center rounded-xl border border-[var(--border)] overflow-hidden sm:h-24 sm:w-24">
+                    <Image
+                      src={p.image}
+                      alt={p.name}
+                      width={96}
+                      height={96}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
+                ) : (
+                  <ProjectPlaceholder name={p.name} index={i} />
+                )}
 
                 <div className="flex min-w-0 flex-1 flex-col gap-1.5">
                   <div className="flex items-start justify-between gap-3">

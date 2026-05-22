@@ -102,8 +102,9 @@ export type Project = {
   githubUrl?: string;
   videoUrl?: string;
   status?: "Live" | "Featured" | "Case study";
-  highlights: string[];
+  features: string[];
   tags: string[];
+  image?: string;
 };
 
 export const projects: Project[] = [
@@ -111,15 +112,18 @@ export const projects: Project[] = [
     slug: "uatt",
     name: "UATT",
     status: "Featured",
-    blurb: "AI sepsis prediction · undergrad thesis",
+    blurb: "AI-based early sepsis prediction · my undergrad thesis",
     description:
-      "An AI-based system for early sepsis prediction that augments patient risk assessment in clinical settings. Presented at the 26th Philippine Computing Science Congress in Davao City.",
+      "An AI-based system for early sepsis prediction that augments patient risk assessment in clinical settings. This uses a Temporal Transformer model architecure to predict sepsis in real-time. The proposed framework incorporates masked self-attention to handle variable-length and irregular sequences, along with explicit missingness encoding to preserve informative absence patterns in clinical measurements. Predictive uncertainty estimation is integrated to improve reliability in high-risk clinical decision support. Presented at the 26th Philippine Computing Science Congress in Davao City.",
     href: "https://sepsis-transformer.vercel.app/",
-    highlights: [
-      "Presented at 26th PCSC, Davao",
-      "End-to-end model + product",
+    features: [
+      "Early sepsis prediction",
+      "Real-time monitoring",
+      "71% accuracy",
     ],
+    videoUrl: "https://drive.google.com/file/d/16Ki20hg6AxTsDCyVYwdHVHMRGrBY1ow1/view?usp=sharing",
     tags: ["Python", "ML", "Healthcare"],
+    image: "/projects-images/sepsis.webp",
   },
   {
     slug: "cropnoses",
@@ -127,10 +131,11 @@ export const projects: Project[] = [
     status: "Live",
     blurb: "AI hydroponics mobile app",
     description:
-      "A mobile app with intelligent plant health analysis improving lettuce crop monitoring efficiency with an accuracy of 85% using React Native, Expo, ExpressJS, MongoDB and MobileNet architecture",
+      "All in one hydroponics management mobile app with intelligent plant health analysis feature improving lettuce crop monitoring efficiency with an accuracy of 85% using React Native, Expo, ExpressJS, MongoDB and MobileNet architecture",
     videoUrl: "https://www.youtube.com/watch?v=f44aBTyZoLU",
-    highlights: ["CNN disease detection · 71% acc", "Real-time monitoring"],
+    features: ["Intelligent Plant Health Analysis · AI Based Insights Recommendations", "Hydroponics Management · Automated Water Management"],
     tags: ["React Native", "Express", "MongoDB", "TensorFlow"],
+    image: "/projects-images/cropnoses.webp",
   },
   {
     slug: "kwentech",
@@ -138,10 +143,11 @@ export const projects: Project[] = [
     status: "Live",
     blurb: "PH rental management platform",
     description:
-      "A rental management platform built for Philippine landlords — properties, tenants, reminders, and invoices in one app.",
+      "A rental management platform built for Philippine landlords — properties, tenants, follow up reminders, and  automated invoices in one app. This uses a multi-tenant SaaS architecture with PostgreSQL and Next.js .",
     href: "https://kwentech.jeth-tech.click/",
-    highlights: ["Multi-tenant SaaS", "PH-localized billing"],
+    features: ["Multi-tenant SaaS", "Property Management", "Tenant Management", "Follow Up Reminders", "Automated Invoice Management"],
     tags: ["Next.js", "PostgreSQL", "SaaS"],
+    image: "/projects-images/kwentech.png",
   },
   {
     slug: "tihik",
@@ -151,7 +157,7 @@ export const projects: Project[] = [
     description:
       "A budget tracker app built for personal finance management and expense tracking.",
     href: "https://tihik.vercel.app/",
-    highlights: ["Personal finance management", "Expense tracking"],
+    features: ["Personal finance management", "Expense tracking"],
     tags: ["Next.js", "PostgreSQL", "TailwindCSS"],
   },
   {
@@ -162,7 +168,7 @@ export const projects: Project[] = [
     description:
       "An external gamified engagement platform built for moodleLMS, allowing students to earn badges and points for completing activities and quizzes.",
     href: "https://moodlequest.vercel.app/",
-    highlights: ["Gamified engagement", "Asynchronous learning"],
+    features: ["Gamified engagement", "Asynchronous learning"],
     tags: ["Next.js", "PostgreSQL", "TailwindCSS"],
   },
 ];

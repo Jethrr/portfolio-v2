@@ -28,9 +28,30 @@ export async function generateMetadata({
   };
 }
 
-function getYouTubeId(url: string): string | null {
-  const match = url.match(/(?:v=|youtu\.be\/)([^&?/]+)/);
-  return match ? match[1] : null;
+type VideoEmbed =
+  | { type: "youtube"; id: string }
+  | { type: "gdrive"; id: string }
+  | { type: "video"; url: string }
+  | { type: "iframe"; url: string };
+
+function resolveVideo(url: string): VideoEmbed | null {
+  if (!url) return null;
+
+  // YouTube
+  const ytMatch = url.match(/(?:v=|youtu\.be\/)([^&?/]+)/);
+  if (ytMatch) return { type: "youtube", id: ytMatch[1] };
+
+  // Google Drive
+  const gdMatch = url.match(/drive\.google\.com\/file\/d\/([^/?]+)/);
+  if (gdMatch) return { type: "gdrive", id: gdMatch[1] };
+  const gdOpenMatch = url.match(/drive\.google\.com\/open\?id=([^&]+)/);
+  if (gdOpenMatch) return { type: "gdrive", id: gdOpenMatch[1] };
+
+  // Direct video file
+  if (/\.(mp4|webm|mov|ogg)(\?|$)/i.test(url)) return { type: "video", url };
+
+  // Generic iframe fallback
+  return { type: "iframe", url };
 }
 
 export default async function ProjectDetailPage({
@@ -42,7 +63,7 @@ export default async function ProjectDetailPage({
   const project = projects.find((p) => p.slug === slug);
   if (!project) notFound();
 
-  const videoId = project.videoUrl ? getYouTubeId(project.videoUrl) : null;
+  const videoEmbed = project.videoUrl ? resolveVideo(project.videoUrl) : null;
 
   return (
     <main className="relative mx-auto w-full max-w-4xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
@@ -75,12 +96,40 @@ export default async function ProjectDetailPage({
 
       {/* Video / Preview */}
       <div className="mb-8 overflow-hidden rounded-2xl border border-[var(--border)] bg-neutral-900">
-        {videoId ? (
+        {videoEmbed?.type === "youtube" ? (
           <div className="aspect-video w-full">
             <iframe
-              src={`https://www.youtube.com/embed/${videoId}`}
+              src={`https://www.youtube.com/embed/${videoEmbed.id}`}
               title={`${project.name} demo video`}
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              className="h-full w-full"
+            />
+          </div>
+        ) : videoEmbed?.type === "gdrive" ? (
+          <div className="aspect-video w-full">
+            <iframe
+              src={`https://drive.google.com/file/d/${videoEmbed.id}/preview`}
+              title={`${project.name} demo video`}
+              allow="autoplay"
+              allowFullScreen
+              className="h-full w-full"
+            />
+          </div>
+        ) : videoEmbed?.type === "video" ? (
+          <div className="aspect-video w-full">
+            <video
+              src={videoEmbed.url}
+              controls
+              className="h-full w-full"
+              title={`${project.name} demo video`}
+            />
+          </div>
+        ) : videoEmbed?.type === "iframe" ? (
+          <div className="aspect-video w-full">
+            <iframe
+              src={videoEmbed.url}
+              title={`${project.name} demo video`}
               allowFullScreen
               className="h-full w-full"
             />
@@ -137,13 +186,13 @@ export default async function ProjectDetailPage({
           </p>
         </div>
 
-        {project.highlights.length > 0 ? (
+        {project.features.length > 0 ? (
           <div className="flex flex-col gap-4">
             <h2 className="font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-500">
-              Highlights
+              Features
             </h2>
             <ul className="flex flex-col gap-3">
-              {project.highlights.map((h) => (
+              {project.features.map((h) => (
                 <li
                   key={h}
                   className="flex items-start gap-3 text-sm text-neutral-400"
