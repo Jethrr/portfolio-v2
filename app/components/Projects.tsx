@@ -41,7 +41,7 @@ function ProjectCard({ project }: { project: Project }) {
         <ArrowUpRightIcon className="h-4 w-4 flex-none text-neutral-600 transition-all group-hover/proj:-translate-y-0.5 group-hover/proj:translate-x-0.5 group-hover/proj:text-amber-200" />
       </div>
       <p className="text-sm leading-relaxed text-neutral-400">
-        {project.description}
+        {project.blurb}
       </p>
     </Link>
   );

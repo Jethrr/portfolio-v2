@@ -109,10 +109,22 @@ export type Project = {
 
 export const projects: Project[] = [
   {
+    slug: "kwentech",
+    name: "KwenTech",
+    status: "Live",
+    blurb: "A rental management SaaS built for PH landlords that replaced manual paper ledgers with an automated billing engine, automated invoice generators and more.",
+    description:
+      "A rental management platform built for Philippine landlords — properties, tenants, follow up reminders, and  automated invoices in one app. This uses a multi-tenant SaaS architecture with PostgreSQL and Next.js .",
+    href: "https://kwentech.jeth-tech.click/",
+    features: ["Multi-tenant SaaS", "Property Management", "Tenant Management", "Follow Up Reminders", "Automated Invoice Management"],
+    tags: ["Next.js", "PostgreSQL", "SaaS"],
+    image: "/projects-images/kwentech.png",
+  },
+  {
     slug: "uatt",
     name: "UATT",
     status: "Featured",
-    blurb: "AI-based early sepsis prediction · my undergrad thesis",
+    blurb: "An AI-based early sepsis prediction system for clinical decision support. My undergrad thesis.",
     description:
       "An AI-based system for early sepsis prediction that augments patient risk assessment in clinical settings. This uses a Temporal Transformer model architecure to predict sepsis in real-time. The proposed framework incorporates masked self-attention to handle variable-length and irregular sequences, along with explicit missingness encoding to preserve informative absence patterns in clinical measurements. Predictive uncertainty estimation is integrated to improve reliability in high-risk clinical decision support. Presented at the 26th Philippine Computing Science Congress in Davao City.",
     href: "https://sepsis-transformer.vercel.app/",
@@ -129,7 +141,7 @@ export const projects: Project[] = [
     slug: "cropnoses",
     name: "Cropnoses",
     status: "Live",
-    blurb: "AI hydroponics mobile app",
+    blurb: "An all in one hydroponics management mobile app with intelligent plant health analysis feature.",
     description:
       "All in one hydroponics management mobile app with intelligent plant health analysis feature improving lettuce crop monitoring efficiency with an accuracy of 85% using React Native, Expo, ExpressJS, MongoDB and MobileNet architecture",
     videoUrl: "https://www.youtube.com/watch?v=f44aBTyZoLU",
@@ -137,18 +149,7 @@ export const projects: Project[] = [
     tags: ["React Native", "Express", "MongoDB", "TensorFlow"],
     image: "/projects-images/cropnoses.webp",
   },
-  {
-    slug: "kwentech",
-    name: "KwenTech",
-    status: "Live",
-    blurb: "PH rental management platform",
-    description:
-      "A rental management platform built for Philippine landlords — properties, tenants, follow up reminders, and  automated invoices in one app. This uses a multi-tenant SaaS architecture with PostgreSQL and Next.js .",
-    href: "https://kwentech.jeth-tech.click/",
-    features: ["Multi-tenant SaaS", "Property Management", "Tenant Management", "Follow Up Reminders", "Automated Invoice Management"],
-    tags: ["Next.js", "PostgreSQL", "SaaS"],
-    image: "/projects-images/kwentech.png",
-  },
+  
   {
     slug: "tihik",
     name: "Tihik",
