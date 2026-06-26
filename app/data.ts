@@ -34,7 +34,7 @@ export type Experience = {
 export const experience: Experience[] = [
   {
     company: "Freelance | Independent Contractor",
-    role: "Software Developer | Automation Specialist",
+    role: "Full Stack Developer | AI Specialist",
     period: "Oct 2023 — Present",
     location: "Remote",
     bullets: [
@@ -50,8 +50,8 @@ export const experience: Experience[] = [
     location: "Remote",
     link: "https://depedmps.com/",
     bullets: [
-      "Built a DepEd MPS monitoring platform that streamlined division-office workflows by centralizing performance data across schools and districts, reducing manual processing and improving data accessibility.",
-      "Implemented CI/CD pipelines to improved deployment process using Coolify, Docker and Github Actions.",
+      "Built a DepEd MPS monitoring platform, automating mean percentage computations and reducing reports generation time from months to minutes.",
+      "Implemented CI/CD pipelines using GitHub Actions, Docker, and Coolify, automating deployments and enabling zero-downtime releases.",
       "Optimized database queries to improve data retrieval for analytics endpoints across 17 districts and 300+ schools and 1 million scores row by 66% (1min to 20s).",
     ],
   },
@@ -149,6 +149,19 @@ export const projects: Project[] = [
     tags: ["React Native", "Express", "MongoDB", "TensorFlow"],
     image: "/projects-images/cropnoses.webp",
   },
+  {
+
+    slug: "Capstone Generator",
+    name: "Capstone Generator",
+    status: "Live",
+    blurb: "A capstone project generator for students",
+    description:
+      "A capstone project generator for students, allowing them to generate capstone projects based on their course and semester.",
+    href: "https://capstone-generator-sandy.vercel.app/generate",
+    features: ["Capstone project generator", "Course and semester selection"],
+    tags: ["Next.js", "PostgreSQL", "TailwindCSS", "AI"],
+    image: "/projects-images/capstone.png",
+  },
   
   {
     slug: "tihik",
@@ -160,6 +173,7 @@ export const projects: Project[] = [
     href: "https://tihik.vercel.app/",
     features: ["Personal finance management", "Expense tracking"],
     tags: ["Next.js", "PostgreSQL", "TailwindCSS"],
+    image: "/projects-images/tihik.png",
   },
   {
     slug: "moodlequest",
@@ -171,7 +185,44 @@ export const projects: Project[] = [
     href: "https://moodlequest.vercel.app/",
     features: ["Gamified engagement", "Asynchronous learning"],
     tags: ["Next.js", "PostgreSQL", "TailwindCSS"],
+    image: "/projects-images/moodlequest.png",
   },
+  {
+    slug: "TeknoLost",
+    name: "TeknoLost",
+    status: "Featured",
+    blurb: "A lost and found app for campus students in CIT-U",
+    description:
+      "A lost and found app for campus students in CIT-U, allowing students to post and find lost and found items on the campus.",
+    href: "https://teknolost.vercel.app/",
+    features: ["Lost and found", "Campus students"],
+    tags: ["React Native", "Expo", "TailwindCSS", "Firebase"],
+    image: "/projects-images/tekno.png",
+  },
+  {
+    slug: "GymChum",
+    name: "GymChum",
+    status: "Featured",
+    blurb: "A gym management app for gyms to manage their members, bookings, and payments",
+    description:
+      "A gym management app for gyms, allowing gyms to manage their members, bookings, and payments.",
+    href: "https://gymchum.vercel.app/",
+    features: ["Gym management", "Member management", "Booking management", "Payment management"],
+    tags: ["PHP", "MySQL", "Laravel", "Next.js"],
+    image: "/projects-images/gymchum.png",
+  },
+  {
+    slug: "Lersch Grossman Algorthm Visualizer",
+    name: "Lersch Grossman Algorthm Visualizer",
+    status: "Featured",
+    blurb: "A visualizer for the Lersch Grossman algorithm",
+    description:
+      "A visualizer for the Lersch Grossman algorithm, allowing users to visualize the algorithm step by step.",
+    href: "https://lersch-grossman-algorithm-visualizer.vercel.app/",
+    features: ["Lersch Grossman algorithm", "Visualization"],
+    tags: ["Java", "JavaFX", "Algorithms"],
+    image: "/projects-images/lersch.png",
+  }
 ];
 
 export type Publication = {

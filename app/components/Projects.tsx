@@ -32,7 +32,7 @@ function ProjectCard({ project }: { project: Project }) {
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group/proj flex flex-col gap-1 rounded-xl border border-[var(--border)] bg-[var(--card)] px-5 py-4 transition-all hover:border-amber-300/30 hover:bg-white/[0.02]"
+      className="group/proj flex flex-col gap-1 rounded-xl border border-[var(--border)] bg-[var(--card)] px-5 py-4 transition-all hover:border-amber-300/30 hover:bg-[var(--surface-subtle)]"
     >
       <div className="flex items-start justify-between gap-3">
         <h3 className="text-base font-semibold text-neutral-50">

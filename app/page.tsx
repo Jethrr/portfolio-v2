@@ -1,4 +1,5 @@
 import { About } from "./components/About";
+import { AnimatedLayout } from "./components/AnimatedLayout";
 import { Contact } from "./components/Contact";
 import { Education } from "./components/Education";
 import { Experience } from "./components/Experience";
@@ -12,7 +13,7 @@ import { TechStack } from "./components/TechStack";
 export default function Home() {
   return (
     <main className="relative mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-      <div className="reveal-children grid grid-cols-12 gap-3 lg:gap-3">
+      <AnimatedLayout className="grid grid-cols-12 gap-3 lg:gap-3">
         <Hero />
         <About />
         <Now />
@@ -25,7 +26,7 @@ export default function Home() {
         <Education />
         <Contact />
         <Footer />
-      </div>
+      </AnimatedLayout>
     </main>
   );
 }

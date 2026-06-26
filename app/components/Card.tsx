@@ -38,7 +38,7 @@ export function CardEyebrow({
 }) {
   return (
     <div className="flex items-center gap-2 px-5 pt-5 pb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-neutral-500 font-mono">
-      <span className="inline-block h-[1px] w-4 bg-neutral-700" />
+      <span className="gsap-eyebrow-line inline-block h-[1px] w-4 bg-neutral-600" />
       <span>{children}</span>
       {action ? <div className="ml-auto">{action}</div> : null}
     </div>

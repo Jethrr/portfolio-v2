@@ -17,11 +17,13 @@ export function Hero() {
     <section className="col-span-12 rounded-2xl border border-[var(--border)] bg-[var(--card)] px-5 py-5 sm:px-9 sm:py-7">
       <div className="flex flex-row items-center justify-between gap-4 sm:gap-6">
         <div className="flex min-w-0 flex-1 flex-col gap-3 sm:gap-4">
-          <div className="flex flex-col gap-1">
-            <h1 className="text-2xl font-bold leading-[1.1] tracking-tight text-neutral-50 sm:text-4xl lg:text-5xl">
+          <div className="flex flex-col gap-1 overflow-hidden">
+            <h1
+              className="gsap-hero-name text-2xl font-bold leading-[1.1] tracking-tight text-neutral-50 sm:text-4xl lg:text-5xl"
+            >
               {profile.name}
             </h1>
-            <p className="text-xs text-neutral-400 sm:text-base">
+            <p className="gsap-hero-role text-xs text-neutral-400 sm:text-base">
               {profile.role}
             </p>
           </div>
@@ -45,7 +47,7 @@ export function Hero() {
           </div>
         </div>
 
-        <div className="relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-[var(--border-strong)] bg-neutral-900 ring-1 ring-white/5 sm:h-32 sm:w-32">
+        <div className="gsap-hero-avatar relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[var(--avatar-bg)] ring-1 ring-[var(--ring-subtle)] sm:h-32 sm:w-32">
           <Image
             src={PROFILE_IMAGE_SRC}
             alt={`${profile.name} — profile photo`}
@@ -81,7 +83,7 @@ function ContactLink({
         rel={isMail ? undefined : "noopener noreferrer"}
         aria-label={label}
         title={label}
-        className="group/link inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-[var(--border-strong)] bg-white/[0.03] px-3 py-1.5 font-mono text-[11px] font-medium text-neutral-200 transition-all hover:border-white/20 hover:bg-white/[0.06] hover:text-neutral-100 sm:gap-2 sm:px-3.5 sm:text-xs"
+        className="gsap-hero-link group/link inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-[var(--border-subtle)] bg-[var(--surface-subtle)] px-3 py-1.5 font-mono text-[11px] font-medium text-neutral-200 transition-all hover:border-[var(--border-subtle-hover)] hover:bg-[var(--surface-subtle-hover)] hover:text-neutral-100 sm:gap-2 sm:px-3.5 sm:text-xs"
       >
         {icon}
         <span>{label}</span>
@@ -97,7 +99,7 @@ function ContactLink({
       rel={isMail ? undefined : "noopener noreferrer"}
       aria-label={label}
       title={label}
-      className="group/link inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-strong)] bg-white/[0.03] text-neutral-300 transition-all hover:border-white/20 hover:bg-white/[0.06] hover:text-neutral-100 sm:h-auto sm:w-auto sm:gap-2 sm:px-3.5 sm:py-1.5 sm:font-mono sm:text-xs sm:font-medium sm:text-neutral-200"
+      className="gsap-hero-link group/link inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-subtle)] text-neutral-300 transition-all hover:border-[var(--border-subtle-hover)] hover:bg-[var(--surface-subtle-hover)] hover:text-neutral-100 sm:h-auto sm:w-auto sm:gap-2 sm:px-3.5 sm:py-1.5 sm:font-mono sm:text-xs sm:font-medium sm:text-neutral-200"
     >
       {icon}
       <span className="hidden sm:inline">{label}</span>

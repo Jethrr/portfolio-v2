@@ -12,7 +12,7 @@ export function Experience() {
             <li
               key={exp.company}
               className={[
-                "grid grid-cols-1 gap-4 py-5 md:grid-cols-[180px_1fr]",
+                "gsap-exp-item grid grid-cols-1 gap-4 py-5 md:grid-cols-[180px_1fr]",
                 i !== experience.length - 1 ? "border-b border-[var(--border)]" : "",
               ].join(" ")}
             >
