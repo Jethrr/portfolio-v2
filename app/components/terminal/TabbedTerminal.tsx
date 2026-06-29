@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { profile } from "../../data";
-import { PromptLine } from "./PromptLine";
+import { TypewriterPrompt, PromptLine } from "./PromptLine";
 import { TerminalTabProvider } from "./TerminalTabContext";
 import { CommandPalette, useCommandPalette } from "./CommandPalette";
 import { SECTIONS, SECTION_MAP, DEFAULT_TAB_ID } from "./sections";
@@ -23,9 +23,105 @@ function CloseTabIcon({ className }: { className?: string }) {
   );
 }
 
+function AnimatedMenuIcon({ open }: { open: boolean }) {
+  return (
+    <span className="nav-fab-icon" data-open={open} aria-hidden="true">
+      <span className="nav-fab-line" />
+      <span className="nav-fab-line" />
+      <span className="nav-fab-line" />
+    </span>
+  );
+}
+
+type ExplorerNavProps = {
+  openTabs: string[];
+  activeTab: string;
+  onSelect: (id: string) => void;
+  onClose?: () => void;
+  showHeader?: boolean;
+  variant?: "sidebar" | "center";
+};
+
+function ExplorerNav({
+  openTabs,
+  activeTab,
+  onSelect,
+  onClose,
+  showHeader = true,
+  variant = "sidebar",
+}: ExplorerNavProps) {
+  const isCenter = variant === "center";
+
+  return (
+    <>
+      {showHeader ? (
+        <div
+          className={[
+            "flex items-center justify-between border-b border-[var(--border)] px-3 py-2.5",
+            isCenter ? "justify-center" : "",
+          ].join(" ")}
+        >
+          <p className="font-mono text-[10px] uppercase tracking-wider text-neutral-600">
+            explorer
+          </p>
+          {onClose && !isCenter ? (
+            <button
+              type="button"
+              onClick={onClose}
+              className="flex h-7 w-7 items-center justify-center rounded-sm text-neutral-500 hover:bg-[var(--surface-subtle)] hover:text-neutral-200"
+              aria-label="Close navigation"
+            >
+              <CloseTabIcon className="h-3.5 w-3.5" />
+            </button>
+          ) : null}
+        </div>
+      ) : null}
+      <nav
+        className={[
+          "flex flex-col gap-0.5 overflow-y-auto p-2",
+          isCenter ? "items-stretch px-1 py-3" : "flex-1",
+        ].join(" ")}
+        aria-label="Sections"
+      >
+        {SECTIONS.map((section) => {
+          const isOpen = openTabs.includes(section.id);
+          const isActive = activeTab === section.id;
+
+          return (
+            <button
+              key={section.id}
+              type="button"
+              onClick={() => onSelect(section.id)}
+              className={[
+                "flex w-full items-center gap-2 rounded-sm text-left font-mono transition-colors",
+                isCenter ? "nav-menu-item justify-center px-4 py-3 text-sm" : "px-2.5 py-2 text-[11px] sm:text-xs",
+                isActive
+                  ? "bg-[var(--accent-soft)] text-accent"
+                  : isOpen
+                    ? "text-neutral-300 hover:bg-[var(--surface-subtle)]"
+                    : "text-neutral-500 hover:bg-[var(--surface-subtle)] hover:text-neutral-300",
+              ].join(" ")}
+            >
+              <span
+                className={[
+                  "h-1.5 w-1.5 shrink-0 rounded-full",
+                  isOpen ? "bg-accent" : "bg-neutral-700",
+                ].join(" ")}
+                aria-hidden="true"
+              />
+              <span className={isCenter ? "" : "truncate"}>{section.navLabel}</span>
+            </button>
+          );
+        })}
+      </nav>
+    </>
+  );
+}
+
 export function TabbedTerminal() {
   const [openTabs, setOpenTabs] = useState<string[]>([DEFAULT_TAB_ID]);
   const [activeTab, setActiveTab] = useState(DEFAULT_TAB_ID);
+  const [navOpen, setNavOpen] = useState(false);
   const { open, setOpen, onClose } = useCommandPalette();
 
   const current = SECTION_MAP[activeTab] ?? SECTIONS[0];
@@ -34,6 +130,7 @@ export function TabbedTerminal() {
     if (!SECTION_MAP[id]) return;
     setOpenTabs((prev) => (prev.includes(id) ? prev : [...prev, id]));
     setActiveTab(id);
+    setNavOpen(false);
   }, []);
 
   const switchTab = useCallback((id: string) => {
@@ -58,6 +155,24 @@ export function TabbedTerminal() {
     });
   }, []);
 
+  useEffect(() => {
+    if (!navOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setNavOpen(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [navOpen]);
+
+  useEffect(() => {
+    if (!navOpen) return;
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prev;
+    };
+  }, [navOpen]);
+
   const contextValue = {
     openTab,
     switchTab,
@@ -70,50 +185,58 @@ export function TabbedTerminal() {
     <TerminalTabProvider value={contextValue}>
       <CommandPalette open={open} onClose={onClose} />
 
-      <div className="gsap-terminal flex min-h-[min(82vh,900px)] overflow-hidden rounded-md border border-[var(--border)] bg-[var(--card)] shadow-2xl shadow-black/40">
-        {/* Sidebar nav */}
-        <aside className="flex w-36 shrink-0 flex-col border-r border-[var(--border)] bg-[#0a0a0c] sm:w-40 lg:w-44">
-          <div className="border-b border-[var(--border)] px-3 py-2.5">
-            <p className="font-mono text-[10px] uppercase tracking-wider text-neutral-600">
-              explorer
-            </p>
-          </div>
-          <nav className="flex flex-1 flex-col gap-0.5 overflow-y-auto p-2" aria-label="Sections">
-            {SECTIONS.map((section) => {
-              const isOpen = openTabs.includes(section.id);
-              const isActive = activeTab === section.id;
+      {/* Mobile floating FAB — fixed to viewport */}
+      <button
+        type="button"
+        onClick={() => setNavOpen((o) => !o)}
+        className={[
+          "fixed bottom-6 left-5 z-[100] flex h-12 w-12 items-center justify-center rounded-full border border-accent/50 bg-[#0d0d0d]/90 font-mono text-accent shadow-lg shadow-black/60 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-accent hover:shadow-accent/20 md:hidden",
+          navOpen ? "scale-105 border-accent bg-[var(--accent-soft)] shadow-accent/25" : "",
+        ].join(" ")}
+        aria-label={navOpen ? "Close explorer" : "Open explorer"}
+        aria-expanded={navOpen}
+      >
+        <AnimatedMenuIcon open={navOpen} />
+      </button>
 
-              return (
-                <button
-                  key={section.id}
-                  type="button"
-                  onClick={() => openTab(section.id)}
-                  className={[
-                    "flex w-full items-center gap-2 rounded-sm px-2.5 py-2 text-left font-mono text-[11px] transition-colors sm:text-xs",
-                    isActive
-                      ? "bg-[var(--accent-soft)] text-accent"
-                      : isOpen
-                        ? "text-neutral-300 hover:bg-[var(--surface-subtle)]"
-                        : "text-neutral-500 hover:bg-[var(--surface-subtle)] hover:text-neutral-300",
-                  ].join(" ")}
-                >
-                  <span
-                    className={[
-                      "h-1.5 w-1.5 shrink-0 rounded-full",
-                      isOpen ? "bg-accent" : "bg-neutral-700",
-                    ].join(" ")}
-                    aria-hidden="true"
-                  />
-                  <span className="truncate">{section.navLabel}</span>
-                </button>
-              );
-            })}
-          </nav>
+      {/* Mobile center menu */}
+      {navOpen ? (
+        <div
+          className="fixed inset-0 z-[90] flex items-center justify-center p-5 md:hidden"
+          role="dialog"
+          aria-modal="true"
+          aria-label="Explorer navigation"
+        >
+          <button
+            type="button"
+            className="nav-overlay-enter absolute inset-0 bg-black/70 backdrop-blur-md"
+            onClick={() => setNavOpen(false)}
+            aria-label="Close navigation overlay"
+          />
+          <div className="nav-panel-enter relative z-10 w-full max-w-sm overflow-hidden rounded-md border border-[var(--border)] bg-[var(--card)] shadow-2xl shadow-black/50">
+            <ExplorerNav
+              openTabs={openTabs}
+              activeTab={activeTab}
+              onSelect={openTab}
+              onClose={() => setNavOpen(false)}
+              variant="center"
+            />
+          </div>
+        </div>
+      ) : null}
+
+      <div className="gsap-terminal relative flex min-h-[min(82vh,900px)] overflow-hidden rounded-md border border-[var(--border)] bg-[var(--card)] shadow-2xl shadow-black/40">
+        {/* Desktop sidebar */}
+        <aside className="hidden w-36 shrink-0 flex-col border-r border-[var(--border)] bg-[#0a0a0c] md:flex lg:w-44">
+          <ExplorerNav
+            openTabs={openTabs}
+            activeTab={activeTab}
+            onSelect={openTab}
+          />
         </aside>
 
         {/* Main terminal pane */}
         <div className="flex min-w-0 flex-1 flex-col">
-          {/* Tab bar — only open tabs */}
           <div className="flex items-stretch border-b border-[var(--border)] bg-[#0f0f12]">
             <div className="flex flex-none items-center gap-1.5 px-3 py-2.5" aria-hidden="true">
               <span className="h-3 w-3 rounded-full" style={{ backgroundColor: "var(--traffic-close)" }} />
@@ -177,7 +300,11 @@ export function TabbedTerminal() {
           </div>
 
           <div className="border-b border-[var(--border)] bg-[var(--card-soft)] px-4 py-2.5">
-            <PromptLine command={current.command} className="text-[11px] sm:text-xs" />
+            <TypewriterPrompt
+              key={activeTab}
+              tabKey={activeTab}
+              command={current.command}
+            />
           </div>
 
           <div className="flex min-h-0 flex-1 overflow-hidden">

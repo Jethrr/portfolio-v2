@@ -1,38 +1,56 @@
+"use client";
+
 import { achievements, certifications } from "../data";
+import { TypewriterSequence, TypewriterText, useIsTabActive } from "./terminal/Typewriter";
 
 export function HighlightsPanel() {
+  const active = useIsTabActive("highlights");
+
   return (
     <div className="flex flex-col gap-6 font-mono text-sm">
       <section>
         <p className="mb-3 text-[10px] uppercase tracking-wider text-neutral-500">
-          @achievements
+          <TypewriterText
+            active={active}
+            text="@achievements"
+            charMs={45}
+            className="text-neutral-500"
+          />
         </p>
-        <ul className="flex flex-col gap-2 text-neutral-300">
-          {achievements.map((a) => (
-            <li key={a.title} className="gsap-block-item flex items-start gap-2">
-              <span className="text-accent" aria-hidden="true">
-                ★
-              </span>
-              <span className="text-neutral-100">{a.title}</span>
-            </li>
-          ))}
-        </ul>
+        <TypewriterSequence
+          active={active}
+          charMs={32}
+          linePauseMs={350}
+          lines={achievements.map((a) => ({
+            text: a.title,
+            as: "p" as const,
+            className: "text-neutral-100",
+            prefix: "★",
+          }))}
+        />
       </section>
 
       <section className="border-t border-[var(--border)] pt-5">
         <p className="mb-3 text-[10px] uppercase tracking-wider text-neutral-500">
-          @certifications
+          <TypewriterText
+            active={active}
+            text="@certifications"
+            charMs={45}
+            startDelay={achievements.length * 400}
+            className="text-neutral-500"
+          />
         </p>
-        <ul className="flex flex-col gap-2 text-neutral-300">
-          {certifications.map((c) => (
-            <li key={c} className="gsap-block-item flex items-start gap-2">
-              <span className="text-accent-header" aria-hidden="true">
-                ▸
-              </span>
-              <span className="text-neutral-200">{c}</span>
-            </li>
-          ))}
-        </ul>
+        <TypewriterSequence
+          active={active}
+          charMs={30}
+          linePauseMs={320}
+          lines={certifications.map((c) => ({
+            text: c,
+            as: "p" as const,
+            className: "text-neutral-200",
+            prefix: "▸",
+          }))}
+        />
       </section>
     </div>
   );

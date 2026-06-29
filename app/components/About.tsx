@@ -1,11 +1,22 @@
+"use client";
+
 import { profile } from "../data";
-import { OutputBlock } from "./terminal/OutputBlock";
+import { TypewriterSequence, useIsTabActive } from "./terminal/Typewriter";
 
 export function AboutPanel() {
+  const active = useIsTabActive("about");
+
   return (
-    <OutputBlock prefix="" className="!pl-0 text-sm leading-relaxed sm:text-base">
-      {profile.summary}
-    </OutputBlock>
+    <TypewriterSequence
+      active={active}
+      lines={[
+        {
+          text: profile.summary,
+          as: "p",
+          className: "text-sm leading-relaxed text-neutral-300 sm:text-base",
+        },
+      ]}
+    />
   );
 }
 

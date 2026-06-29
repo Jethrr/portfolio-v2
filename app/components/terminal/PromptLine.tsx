@@ -1,3 +1,5 @@
+import { TypewriterText } from "./Typewriter";
+
 type PromptLineProps = {
   user?: string;
   host?: string;
@@ -32,6 +34,29 @@ export function PromptLine({
           ▋
         </span>
       ) : null}
+    </div>
+  );
+}
+
+type TypewriterPromptProps = {
+  command: string;
+  tabKey: string;
+};
+
+export function TypewriterPrompt({ command, tabKey }: TypewriterPromptProps) {
+  return (
+    <div className="flex flex-wrap items-baseline gap-x-1 font-mono text-[11px] sm:text-xs">
+      <span className="terminal-prompt-user">visitor@jeth</span>
+      <span className="text-neutral-500">:</span>
+      <span className="text-accent">~</span>
+      <span className="text-neutral-500">$</span>
+      <TypewriterText
+        key={tabKey}
+        active
+        text={command}
+        charMs={42}
+        className="text-neutral-200"
+      />
     </div>
   );
 }
