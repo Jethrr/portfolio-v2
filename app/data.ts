@@ -33,41 +33,29 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    company: "Freelance | Independent Contractor",
-    role: "Full Stack Developer | AI Specialist",
-    period: "Oct 2023 — Present",
-    location: "Remote",
-    bullets: [
-      "Developed a localized Rental Management SaaS that replaced manual paper ledgers with an automated billing engine, generating recurring invoices for 20+ units and reducing administrative workload by 70%.",
-      "Engineered PDF-based automation pipelines for a US client to extract consultant commission data, reducing manual processing time by 60%.",
-      "Designed and shipped production-grade web apps and automation solutions for clients and businesses.",
-    ],
-  },
-  {
-    company: "MPS Deped Region 10",
-    role: "Full Stack Developer",
+    company: "Sanct",
+    role: "Software Developer",
     period: "Nov 2025 — Present",
     location: "Remote",
     link: "https://depedmps.com/",
     bullets: [
-      "Built a DepEd MPS monitoring platform, automating mean percentage computations and reducing reports generation time from months to minutes.",
-      "Implemented CI/CD pipelines using GitHub Actions, Docker, and Coolify, automating deployments and enabling zero-downtime releases.",
-      "Optimized database queries to improve data retrieval for analytics endpoints across 17 districts and 300+ schools and 1 million scores row by 66% (1min to 20s).",
+      "Developed a full-stack MPS monitoring platform, centralizing performance data across 17 districts and 300+ schools, replacing fragmented manual workflows.",
+      "Implemented CI/CD pipelines using GitHub Actions, Docker, and Coolify, reducing deployment time and improving release reliability.",
+      "Optimized PostgreSQL database queries for analytics endpoints handling over 1 million score records, improving data retrieval speed by 66% (from 60s to 20s).",
     ],
   },
   {
     company: "Symph",
     role: "Software Engineer Intern",
-    period: "May 2025 — Dec 2025",
+    period: "May 2025 — Nov 2025",
     location: "Remote",
     link: "https://www.symph.co/",
     bullets: [
-      "Delivered and maintained secure, cross-platform digital solutions for startups and businesses, improving scalability and development efficiency using NextJS, React Native, and NestJS with cloud services such as GCP, Supabase, and Firebase.",
-      "Worked with 2 startups and 2 client projects leveraging AI-augmented workflows, REST APIs, and CI pipelines, improving delivery efficiency and contributing to up to 10% revenue growth.",
-      "Collaborated with cross-functional teams (product managers, designers, and developers) in an Agile Scrum environment, improving workflow coordination and delivery efficiency using ClickUp.",
+      "Delivered and maintained cross-platform digital solutions for startups and businesses using Next.js, React Native, and NestJS, integrated with GCP, Supabase, and Firebase cloud services.",
+      "Resolved 200+ tickets spanning bug fixes, feature development, and REST API integrations across 4 client projects in Agile Scrum sprints using ClickUp, leveraging AI-augmented workflows for automation, development and decision making.",
+      "Defined and enforced backend engineering standards for architecture, API design, code structure, documentation, and security, reducing onboarding time and improving codebase consistency across different teams.",
     ],
   },
-  
 ];
 
 export type Organization = {
@@ -249,28 +237,28 @@ export type StackGroup = {
 
 export const stack: StackGroup[] = [
   {
+    label: "Languages",
+    items: ["TypeScript", "JavaScript", "Python", "Java", "C#", "C++", "PHP", "MySQL"],
+  },
+  {
     label: "Frontend",
-    items: ["React", "Next.js", "React Native", "TailwindCSS", "Tanstack Query", "Orval"],
+    items: ["React", "Next.js", "Vue.js", "React Native", "Expo", "TailwindCSS", "TanStack Query", "Orval", "GSAP"],
   },
   {
     label: "Backend",
-    items: ["NestJS", "Express", "FastAPI", ".NET", "REST APIs", "OpenAPI", "Nx"],
+    items: ["Node.js", "NestJS", "Express", "FastAPI", "ASP.NET", "Laravel", "Nx"],
   },
   {
     label: "Database",
-    items: ["PostgreSQL", "Supabase", "MongoDB", "Firebase"],
+    items: ["PostgreSQL", "MySQL", "SQLite", "Supabase", "Firebase", "NoSQL"],
   },
   {
     label: "Cloud & DevOps",
-    items: ["Docker", "Coolify", "Dokploy", "Cloudflare", "GitHub Actions"],
+    items: ["GitHub Actions", "Docker", "VPS", "Coolify", "Dokploy", "Vercel", "Nginx", "Cloudflare"],
   },
   {
     label: "ML / AI",
     items: ["TensorFlow", "Keras", "YOLO", "NumPy", "Pandas"],
-  },
-  {
-    label: "Languages",
-    items: ["TypeScript", "JavaScript", "Python", "C#", "SQL"],
   },
   {
     label: "CRM & CMS",
@@ -292,9 +280,10 @@ export const education = {
 
 export const certifications = [
   "AWS Cloud Academy Graduate — Cloud Architect",
-  "AWS Cloud Academy Graduate — Cloud Foundations",
-  "TOPCIT Level III — Industry Standard (Korea)",
-  "N8N Intermediate Level 2",
+  "Zuitt Learning Institute Incorporated — Javascript Elective Course",
+  "Korea Test of Practical Competency in ICT (TOPCIT) — Level III Industry Standard",
+  "Top 10 Philippine Agri Aqua Innovation Challenge Finalists",
+  "3rd Prize SEA China International College Students' Innovation Competition",
 ];
 
 export const achievements = [

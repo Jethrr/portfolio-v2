@@ -1,48 +1,69 @@
 import Link from "next/link";
 import { projects, type Project } from "../data";
-import { Card, CardEyebrow, CardBody } from "./Card";
 import { ArrowUpRightIcon } from "./Icons";
 
-export function Projects() {
+function projectPerms(index: number) {
+  return index % 2 === 0 ? "drwxr-xr-x" : "-rw-r--r--";
+}
+
+export function ProjectsPanel() {
   return (
-    <Card className="col-span-12 lg:col-span-7">
-      <CardEyebrow
-        action={
-          <Link
-            href="/projects"
-            className="group/view inline-flex items-center gap-1 rounded-full px-1 font-mono text-[10px] uppercase tracking-[0.18em] text-neutral-400 transition-colors hover:text-amber-200"
-          >
-            View all
-            <ArrowUpRightIcon className="h-3 w-3 transition-transform group-hover/view:-translate-y-0.5 group-hover/view:translate-x-0.5" />
-          </Link>
-        }
-      >
-        Projects
-      </CardEyebrow>
-      <CardBody className="gap-2">
-        {projects.slice(0, 3).map((p) => (
-          <ProjectCard key={p.slug} project={p} />
+    <div className="flex flex-col font-mono text-xs">
+      <div className="mb-4 flex items-center justify-between border-b border-[var(--border)] pb-2">
+        <p className="text-neutral-500">total {projects.length}</p>
+        <Link
+          href="/projects"
+          className="group/view inline-flex items-center gap-1 text-[10px] uppercase tracking-wider text-neutral-400 transition-colors hover:text-accent"
+        >
+          ls -la
+          <ArrowUpRightIcon className="h-3 w-3 transition-transform group-hover/view:-translate-y-0.5 group-hover/view:translate-x-0.5" />
+        </Link>
+      </div>
+
+      <div className="flex flex-col divide-y divide-[var(--border)]">
+        {projects.map((p, i) => (
+          <ProjectRow key={p.slug} project={p} index={i} />
         ))}
-      </CardBody>
-    </Card>
+      </div>
+    </div>
   );
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectRow({ project, index }: { project: Project; index: number }) {
+  const slug = project.slug.replace(/\s+/g, "-").toLowerCase();
+
   return (
     <Link
       href={`/projects/${project.slug}`}
-      className="group/proj flex flex-col gap-1 rounded-xl border border-[var(--border)] bg-[var(--card)] px-5 py-4 transition-all hover:border-amber-300/30 hover:bg-[var(--surface-subtle)]"
+      className="group/proj block px-1 py-3 transition-colors hover:bg-[var(--surface-subtle)] sm:px-2"
     >
       <div className="flex items-start justify-between gap-3">
-        <h3 className="text-base font-semibold text-neutral-50">
-          {project.name}
-        </h3>
-        <ArrowUpRightIcon className="h-4 w-4 flex-none text-neutral-600 transition-all group-hover/proj:-translate-y-0.5 group-hover/proj:translate-x-0.5 group-hover/proj:text-amber-200" />
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1 text-[11px]">
+            <span className="shrink-0 text-neutral-500">{projectPerms(index)}</span>
+            <span className="shrink-0 text-neutral-500">1.{index}</span>
+            <span className="shrink-0 text-neutral-600">dev staff</span>
+            <span className="font-medium text-neutral-100 group-hover/proj:text-accent">
+              {slug}/
+            </span>
+            {project.status ? (
+              <span className="shrink-0 text-[10px] text-accent-header">
+                [{project.status}]
+              </span>
+            ) : null}
+          </div>
+
+          <p className="mt-2 text-[11px] leading-relaxed text-neutral-400">
+            {project.blurb}
+          </p>
+        </div>
+
+        <ArrowUpRightIcon className="mt-0.5 h-3.5 w-3.5 shrink-0 text-neutral-600 transition-colors group-hover/proj:text-accent" />
       </div>
-      <p className="text-sm leading-relaxed text-neutral-400">
-        {project.blurb}
-      </p>
     </Link>
   );
+}
+
+export function Projects() {
+  return <ProjectsPanel />;
 }

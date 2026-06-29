@@ -1,46 +1,56 @@
 import type { ComponentProps, ReactNode } from "react";
+import { TerminalWindow } from "./terminal/TerminalWindow";
+import { PromptLine } from "./terminal/PromptLine";
 
-type CardProps = ComponentProps<"div"> & {
-  as?: "div" | "section" | "article";
-  eyebrow?: string;
+type CardProps = ComponentProps<"section"> & {
+  title?: string;
   children: ReactNode;
 };
 
 export function Card({
-  as: Tag = "section",
-  eyebrow,
+  title,
   className = "",
   children,
   ...rest
 }: CardProps) {
+  const windowTitle = title ?? "jeth@portfolio — zsh";
+
   return (
-    <Tag
-      className={[
-        "group relative flex flex-col overflow-hidden rounded-2xl",
-        "border border-[var(--border)] bg-[var(--card)]",
-        "transition-colors duration-300 hover:border-[var(--border-strong)]",
-        className,
-      ].join(" ")}
+    <section
+      className={["col-span-12", className].join(" ")}
       {...rest}
     >
-      {eyebrow ? <CardEyebrow>{eyebrow}</CardEyebrow> : null}
-      {children}
-    </Tag>
+      <TerminalWindow
+        title={windowTitle}
+        className="transition-colors duration-300 hover:border-[var(--border-strong)]"
+      >
+        {children}
+      </TerminalWindow>
+    </section>
   );
 }
 
 export function CardEyebrow({
   children,
+  command,
   action,
 }: {
-  children: ReactNode;
+  children?: ReactNode;
+  command?: string;
   action?: ReactNode;
 }) {
+  const cmd =
+    command ??
+    (typeof children === "string"
+      ? children.toLowerCase().includes("git")
+        ? children
+        : `cat ${children.toLowerCase().replace(/&amp;/g, "and").replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "")}.txt`
+      : "");
+
   return (
-    <div className="flex items-center gap-2 px-5 pt-5 pb-3 text-[10px] font-medium uppercase tracking-[0.18em] text-neutral-500 font-mono">
-      <span className="gsap-eyebrow-line inline-block h-[1px] w-4 bg-neutral-600" />
-      <span>{children}</span>
-      {action ? <div className="ml-auto">{action}</div> : null}
+    <div className="flex items-center gap-2 border-b border-[var(--border)] px-4 py-3">
+      <PromptLine command={cmd} className="flex-1 text-[11px] sm:text-xs" />
+      {action ? <div className="ml-auto flex-shrink-0">{action}</div> : null}
     </div>
   );
 }
@@ -52,5 +62,9 @@ export function CardBody({
   children: ReactNode;
   className?: string;
 }) {
-  return <div className={`flex flex-col gap-3 px-5 pb-5 ${className}`}>{children}</div>;
+  return (
+    <div className={`flex flex-col gap-3 px-4 py-4 sm:px-5 sm:py-5 ${className}`}>
+      {children}
+    </div>
+  );
 }

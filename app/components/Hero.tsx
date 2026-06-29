@@ -1,109 +1,79 @@
 import Image from "next/image";
 import { profile } from "../data";
-import {
-  ArrowUpRightIcon,
-  GitHubIcon,
-  MailIcon,
-  PinIcon,
-} from "./Icons";
+import { OutputBlock } from "./terminal/OutputBlock";
+import { AsciiBanner } from "./terminal/AsciiBanner";
+import { Stats } from "./Stats";
 
-const PROFILE_IMAGE_SRC = "/profile.webp";
 const LOCATION_MAPS_URL = `https://maps.google.com/?q=${encodeURIComponent(
   profile.location,
 )}`;
 
-export function Hero() {
+export function HeroPanel() {
   return (
-    <section className="col-span-12 rounded-2xl border border-[var(--border)] bg-[var(--card)] px-5 py-5 sm:px-9 sm:py-7">
-      <div className="flex flex-row items-center justify-between gap-4 sm:gap-6">
-        <div className="flex min-w-0 flex-1 flex-col gap-3 sm:gap-4">
-          <div className="flex flex-col gap-1 overflow-hidden">
-            <h1
-              className="gsap-hero-name text-2xl font-bold leading-[1.1] tracking-tight text-neutral-50 sm:text-4xl lg:text-5xl"
-            >
-              {profile.name}
-            </h1>
-            <p className="gsap-hero-role text-xs text-neutral-400 sm:text-base">
-              {profile.role}
-            </p>
-          </div>
-          <div className="flex items-center gap-2">
-            <ContactLink
-              href={LOCATION_MAPS_URL}
-              icon={<PinIcon className="h-3.5 w-3.5" />}
-              label={profile.location}
-              alwaysShowLabel
-            />
-            <ContactLink
-              href={profile.githubUrl}
-              icon={<GitHubIcon className="h-4 w-4 sm:h-3.5 sm:w-3.5" />}
-              label={profile.github}
-            />
-            <ContactLink
-              href={`mailto:${profile.email}`}
-              icon={<MailIcon className="h-4 w-4 sm:h-3.5 sm:w-3.5" />}
-              label={profile.email}
-            />
-          </div>
+    <div className="flex flex-col gap-4">
+      <div className="flex flex-col gap-1.5">
+        <h1 className="gsap-hero-name text-lg font-bold text-accent sm:text-xl">
+          {profile.name}
+        </h1>
+        <p className="gsap-hero-role text-sm text-neutral-300">{profile.tagline}</p>
+        <OutputBlock className="!pl-0 text-xs sm:text-sm">{profile.role}</OutputBlock>
+        <OutputBlock className="!pl-0 text-xs sm:text-sm">
+          Location: {profile.location}
+        </OutputBlock>
+        <OutputBlock className="!pl-0 text-xs text-accent/80 sm:text-sm">
+          Status: {profile.status}
+        </OutputBlock>
+      </div>
+
+      <div className="gsap-hero-ascii">
+        <AsciiBanner />
+      </div>
+
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex flex-wrap gap-x-4 gap-y-1 font-mono text-[11px] sm:text-xs">
+          <ContactCommand href={profile.githubUrl} label={profile.github} />
+          <ContactCommand href={`mailto:${profile.email}`} label={profile.email} />
+          <ContactCommand href={profile.websiteUrl} label={profile.website} />
+          <ContactCommand href={LOCATION_MAPS_URL} label={profile.location} />
         </div>
 
-        <div className="gsap-hero-avatar relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border border-[var(--border-strong)] bg-[var(--avatar-bg)] ring-1 ring-[var(--ring-subtle)] sm:h-32 sm:w-32">
-          <Image
-            src={PROFILE_IMAGE_SRC}
-            alt={`${profile.name} — profile photo`}
-            fill
-            priority
-            sizes="(min-width: 640px) 128px, 80px"
-            className="object-cover"
-          />
+        <div className="gsap-hero-avatar flex-shrink-0 overflow-hidden border border-[var(--border)]">
+          <div className="relative h-20 w-20 sm:h-24 sm:w-24">
+            <Image
+              src="/profile.webp"
+              alt={`${profile.name} — profile photo`}
+              fill
+              priority
+              sizes="96px"
+              className="object-cover"
+            />
+          </div>
+          <p className="border-t border-[var(--border)] bg-[var(--card-soft)] px-2 py-0.5 text-center text-[9px] text-neutral-600">
+            avatar.png
+          </p>
         </div>
       </div>
-    </section>
+
+      <Stats />
+    </div>
   );
 }
 
-function ContactLink({
-  href,
-  icon,
-  label,
-  alwaysShowLabel = false,
-}: {
-  href: string;
-  icon: React.ReactNode;
-  label: string;
-  alwaysShowLabel?: boolean;
-}) {
+function ContactCommand({ href, label }: { href: string; label: string }) {
   const isMail = href.startsWith("mailto:");
-
-  if (alwaysShowLabel) {
-    return (
-      <a
-        href={href}
-        target={isMail ? undefined : "_blank"}
-        rel={isMail ? undefined : "noopener noreferrer"}
-        aria-label={label}
-        title={label}
-        className="gsap-hero-link group/link inline-flex items-center gap-1.5 whitespace-nowrap rounded-full border border-[var(--border-subtle)] bg-[var(--surface-subtle)] px-3 py-1.5 font-mono text-[11px] font-medium text-neutral-200 transition-all hover:border-[var(--border-subtle-hover)] hover:bg-[var(--surface-subtle-hover)] hover:text-neutral-100 sm:gap-2 sm:px-3.5 sm:text-xs"
-      >
-        {icon}
-        <span>{label}</span>
-        <ArrowUpRightIcon className="hidden h-3 w-3 -translate-x-0.5 opacity-0 transition-all group-hover/link:translate-x-0 group-hover/link:opacity-100 sm:inline-block" />
-      </a>
-    );
-  }
-
   return (
     <a
       href={href}
       target={isMail ? undefined : "_blank"}
       rel={isMail ? undefined : "noopener noreferrer"}
-      aria-label={label}
-      title={label}
-      className="gsap-hero-link group/link inline-flex h-9 w-9 items-center justify-center rounded-full border border-[var(--border-subtle)] bg-[var(--surface-subtle)] text-neutral-300 transition-all hover:border-[var(--border-subtle-hover)] hover:bg-[var(--surface-subtle-hover)] hover:text-neutral-100 sm:h-auto sm:w-auto sm:gap-2 sm:px-3.5 sm:py-1.5 sm:font-mono sm:text-xs sm:font-medium sm:text-neutral-200"
+      className="gsap-hero-link text-neutral-400 transition-colors hover:text-accent"
     >
-      {icon}
-      <span className="hidden sm:inline">{label}</span>
-      <ArrowUpRightIcon className="hidden h-3 w-3 -translate-x-0.5 opacity-0 transition-all group-hover/link:translate-x-0 group-hover/link:opacity-100 sm:inline-block" />
+      {label}
     </a>
   );
+}
+
+/* @deprecated — use TabbedTerminal */
+export function Hero() {
+  return <HeroPanel />;
 }

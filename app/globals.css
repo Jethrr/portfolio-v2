@@ -1,6 +1,6 @@
 @import "tailwindcss";
 
-/* ── Neutral palette (theme-aware) ─────────────────────────── */
+/* ── Terminal palette ──────────────────────────────────────── */
 :root {
   --n-50:  #fafafa;
   --n-100: #f5f5f5;
@@ -14,92 +14,49 @@
   --n-900: #171717;
   --n-950: #0a0a0a;
 
-  /* amber */
-  --a-100: #fef3c7;
-  --a-200: #fde68a;
-  --a-300: #fcd34d;
-  --a-400: #fbbf24;
+  --background:    #0d0d0d;
+  --foreground:    #f5f5f5;
+  --card:          #141414;
+  --card-soft:     #181818;
+  --border:        rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --muted:         #737373;
+  --muted-strong:  #a3a3a3;
+  --accent:        #4ade80;
+  --accent-soft:   rgba(74, 222, 128, 0.12);
+  --accent-header: #c4b5fd;
+  --accent-header-soft: rgba(196, 181, 253, 0.12);
+  --error:         #f87171;
+  --grid-bg:       #0d0d0d;
 
-  /* semantic */
-  --background:   #0a0a0a;
-  --foreground:   #f5f5f5;
-  --card:         #141414;
-  --card-soft:    #181818;
-  --border:       rgba(255, 255, 255, 0.06);
-  --border-strong:rgba(255, 255, 255, 0.1);
-  --muted:        #a3a3a3;
-  --muted-strong: #d4d4d4;
-  --accent:       #fbbf24;
-  --accent-soft:  rgba(251, 191, 36, 0.12);
-  --grid-bg:      #0a0a0a;
-
-  /* surface transparencies */
   --surface-subtle:       rgba(255, 255, 255, 0.03);
   --surface-subtle-hover: rgba(255, 255, 255, 0.06);
   --border-subtle:        rgba(255, 255, 255, 0.10);
   --border-subtle-hover:  rgba(255, 255, 255, 0.20);
   --avatar-bg:            #171717;
   --ring-subtle:          rgba(255, 255, 255, 0.05);
+
+  --traffic-close:  #ff5f57;
+  --traffic-min:    #febc2e;
+  --traffic-max:    #28c840;
 }
 
-/* ── Light mode overrides ──────────────────────────────────── */
-[data-theme="light"] {
-  /* Neutrals: true inversion for text readability on white */
-  --n-50:  #0d0d0d;   /* headings — near black */
-  --n-100: #1a1a1a;
-  --n-200: #2d2d2d;   /* pill text */
-  --n-300: #3d3d3d;   /* body text */
-  --n-400: #595959;   /* muted body — still readable */
-  --n-500: #6e6e6e;   /* eyebrows / timestamps */
-  --n-600: #8a8a8a;   /* bullet dots / separators */
-  --n-700: #c8c8c8;   /* decorative lines (eyebrow dash) */
-  --n-800: #e0e0e0;
-  --n-900: #f0f0f0;   /* avatar bg */
-  --n-950: #f8f8f8;
-
-  /* Amber: darker for readability on white backgrounds */
-  --a-100: #78350f;   /* amber-900 */
-  --a-200: #92400e;   /* amber-800 */
-  --a-300: #b45309;   /* amber-700 */
-  --a-400: #d97706;   /* amber-600 */
-
-  --background:    #f7f7f5;
-  --foreground:    #111111;
-  --card:          #ffffff;
-  --card-soft:     #f2f2f0;
-  --border:        rgba(0, 0, 0, 0.07);
-  --border-strong: rgba(0, 0, 0, 0.12);
-  --muted:         #6b6b6b;
-  --muted-strong:  #2e2e2e;
-  --accent:        #d97706;
-  --accent-soft:   rgba(217, 119, 6, 0.10);
-  --grid-bg:       #f7f7f5;
-
-  --surface-subtle:       rgba(0, 0, 0, 0.04);
-  --surface-subtle-hover: rgba(0, 0, 0, 0.07);
-  --border-subtle:        rgba(0, 0, 0, 0.10);
-  --border-subtle-hover:  rgba(0, 0, 0, 0.18);
-  --avatar-bg:            #e8e8e6;
-  --ring-subtle:          rgba(0, 0, 0, 0.05);
-}
-
-/* ── Tailwind v4 theme mapping ─────────────────────────────── */
+/* ── Tailwind v4 theme mapping ───────────────────────────── */
 @theme inline {
-  --color-background:   var(--background);
-  --color-foreground:   var(--foreground);
-  --color-card:         var(--card);
-  --color-card-soft:    var(--card-soft);
-  --color-border:       var(--border);
-  --color-border-strong:var(--border-strong);
-  --color-muted:        var(--muted);
-  --color-muted-strong: var(--muted-strong);
-  --color-accent:       var(--accent);
-  --color-accent-soft:  var(--accent-soft);
-  --font-sans:          var(--font-sans);
-  --font-mono:          var(--font-mono);
-  --font-display:       var(--font-display);
+  --color-background:    var(--background);
+  --color-foreground:    var(--foreground);
+  --color-card:          var(--card);
+  --color-card-soft:     var(--card-soft);
+  --color-border:        var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-muted:         var(--muted);
+  --color-muted-strong:  var(--muted-strong);
+  --color-accent:        var(--accent);
+  --color-accent-soft:   var(--accent-soft);
+  --color-accent-header: var(--accent-header);
+  --font-sans:           var(--font-mono);
+  --font-mono:           var(--font-mono);
 
-  /* neutral palette → CSS vars so all text-neutral-* adapt to theme */
   --color-neutral-50:  var(--n-50);
   --color-neutral-100: var(--n-100);
   --color-neutral-200: var(--n-200);
@@ -111,12 +68,6 @@
   --color-neutral-800: var(--n-800);
   --color-neutral-900: var(--n-900);
   --color-neutral-950: var(--n-950);
-
-  /* amber palette → adapts for readability on both themes */
-  --color-amber-100: var(--a-100);
-  --color-amber-200: var(--a-200);
-  --color-amber-300: var(--a-300);
-  --color-amber-400: var(--a-400);
 }
 
 /* ── Base ──────────────────────────────────────────────────── */
@@ -130,52 +81,86 @@ html {
 }
 
 body {
-  background:
-    radial-gradient(
-      1200px 600px at 50% -10%,
-      rgba(251, 191, 36, 0.06),
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 500px at 100% 100%,
-      rgba(56, 189, 248, 0.04),
-      transparent 60%
-    ),
-    var(--background);
+  background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: var(--font-mono), ui-monospace, monospace;
 }
 
-:root[data-theme="light"] body {
+::selection {
+  background: rgba(74, 222, 128, 0.25);
+  color: #f5f5f5;
+}
+
+/* ── Terminal wallpaper ────────────────────────────────────── */
+.terminal-wallpaper {
   background:
-    radial-gradient(
-      1200px 600px at 50% -10%,
-      rgba(217, 119, 6, 0.05),
-      transparent 60%
-    ),
-    radial-gradient(
-      900px 500px at 100% 100%,
-      rgba(56, 189, 248, 0.03),
-      transparent 60%
-    ),
+    radial-gradient(ellipse 600px 400px at 10% 20%, rgba(139, 92, 246, 0.12), transparent 70%),
+    radial-gradient(ellipse 500px 350px at 90% 80%, rgba(139, 92, 246, 0.08), transparent 70%),
+    radial-gradient(ellipse 300px 200px at 50% 50%, rgba(74, 222, 128, 0.03), transparent 60%),
     var(--background);
+  min-height: 100vh;
 }
 
 /* ── Scrollbar ─────────────────────────────────────────────── */
-::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar { width: 8px; height: 8px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.10);
+  border-radius: 0;
 }
-::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.16); }
+::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.18); }
 
-[data-theme="light"] ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.12);
+/* ── Terminal utilities ────────────────────────────────────── */
+.terminal-prompt {
+  color: var(--accent);
 }
-[data-theme="light"] ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.22);
+
+.terminal-prompt-user {
+  color: var(--accent-header);
+}
+
+.terminal-output {
+  color: var(--muted);
+  padding-left: 1rem;
+}
+
+.terminal-header {
+  color: var(--accent-header);
+}
+
+.ascii-art {
+  color: var(--accent);
+  line-height: 1.1;
+  white-space: pre;
+  font-size: 0.65rem;
+}
+
+@media (min-width: 640px) {
+  .ascii-art { font-size: 0.75rem; }
+}
+
+@keyframes cursor-blink {
+  0%, 49% { opacity: 1; }
+  50%, 100% { opacity: 0; }
+}
+
+.cursor-blink {
+  animation: cursor-blink 1s step-end infinite;
+}
+
+.scanlines::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9998;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
 }
 
 /* ── Animations ────────────────────────────────────────────── */
@@ -185,12 +170,6 @@ body {
 }
 .dot-pulse { animation: pulse-dot 2s ease-in-out infinite; }
 
-@keyframes float-slow {
-  0%, 100% { transform: translateY(0); }
-  50%       { transform: translateY(-4px); }
-}
-
-/* GSAP handles reveal — CSS fallback for no-JS / reduced-motion */
 @keyframes reveal-up {
   from { opacity: 0; transform: translateY(10px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -214,29 +193,26 @@ body {
 .reveal-children > *:nth-child(11) { --reveal-delay: 700ms; }
 .reveal-children > *:nth-child(12) { --reveal-delay: 770ms; }
 
+.tab-panel-active {
+  animation: tab-fade-in 0.15s ease;
+}
+
+@keyframes tab-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .reveal-children > * {
     animation: none;
     opacity: 1;
     transform: none;
   }
+  .tab-panel-active { animation: none; }
+  .cursor-blink { animation: none; opacity: 1; }
 }
 
-/* ── Grid bg ───────────────────────────────────────────────── */
-.grid-bg {
-  background-image:
-    linear-gradient(to right,  rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 32px 32px;
-  background-position: -1px -1px;
-}
-[data-theme="light"] .grid-bg {
-  background-image:
-    linear-gradient(to right,  rgba(0, 0, 0, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-}
-
-/* ── Theme color transitions — GSAP owns opacity/transform ─── */
+/* ── Theme color transitions ───────────────────────────────── */
 *, *::before, *::after {
   transition-property: background-color, border-color, color, fill, stroke, box-shadow;
   transition-duration: 0.22s;

@@ -1,32 +1,33 @@
-import { About } from "./components/About";
+"use client";
+
+import { useEffect, useState } from "react";
+import { TabbedTerminal } from "./components/terminal/TabbedTerminal";
+import { BootSequence } from "./components/terminal/BootSequence";
 import { AnimatedLayout } from "./components/AnimatedLayout";
-import { Contact } from "./components/Contact";
-import { Education } from "./components/Education";
-import { Experience } from "./components/Experience";
-import { Footer } from "./components/Footer";
-import { Hero } from "./components/Hero";
-import { Now } from "./components/Now";
-import { Projects } from "./components/Projects";
-import { Publications } from "./components/Publications";
-import { TechStack } from "./components/TechStack";
+
+const BOOT_KEY = "jeth-boot-seen";
 
 export default function Home() {
+  const [showBoot, setShowBoot] = useState(true);
+
+  useEffect(() => {
+    const seen = sessionStorage.getItem(BOOT_KEY);
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (seen || reducedMotion) {
+      setShowBoot(false);
+    }
+  }, []);
+
   return (
-    <main className="relative mx-auto w-full max-w-6xl px-4 py-10 sm:px-6 sm:py-14 lg:px-8">
-      <AnimatedLayout className="grid grid-cols-12 gap-3 lg:gap-3">
-        <Hero />
-        <About />
-        <Now />
-        <Experience />
-        <Projects />
-        <div className="col-span-12 flex flex-col-reverse gap-3 lg:contents">
-          <Publications />
-          <TechStack />
-        </div>
-        <Education />
-        <Contact />
-        <Footer />
-      </AnimatedLayout>
-    </main>
+    <div className="terminal-wallpaper flex min-h-screen flex-col">
+      {showBoot ? (
+        <BootSequence onComplete={() => setShowBoot(false)} />
+      ) : null}
+      <main className="relative mx-auto flex w-full max-w-6xl flex-1 flex-col px-4 py-8 pb-6 sm:px-6 sm:py-12 lg:px-8">
+        <AnimatedLayout>
+          <TabbedTerminal />
+        </AnimatedLayout>
+      </main>
+    </div>
   );
 }
