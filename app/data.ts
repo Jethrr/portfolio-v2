@@ -103,7 +103,7 @@ export const projects: Project[] = [
     blurb: "A rental management SaaS built for PH landlords that replaced manual paper ledgers with an automated billing engine, automated invoice generators and more.",
     description:
       "A rental management platform built for Philippine landlords — properties, tenants, follow up reminders, and  automated invoices in one app. This uses a multi-tenant SaaS architecture with PostgreSQL and Next.js .",
-    href: "https://kwentech.jeth-tech.click/",
+    href: "https://proptech-woad.vercel.app/",
     features: ["Multi-tenant SaaS", "Property Management", "Tenant Management", "Follow Up Reminders", "Automated Invoice Management"],
     tags: ["Next.js", "PostgreSQL", "SaaS"],
     image: "/projects-images/kwentech.png",
